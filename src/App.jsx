@@ -14,9 +14,12 @@ import { AdminDashboard } from './pages/AdminDashboard';
 import { ClientDashboard } from './pages/ClientDashboard';
 import { WorkerPlaceholder } from './pages/WorkerPlaceholder';
 
+// BASE_URL es "/web-pope/" en GitHub Pages y "/" en desarrollo.
+const basename = import.meta.env.BASE_URL.replace(/\/$/, '') || '/';
+
 export default function App() {
   return (
-    <Router>
+    <Router basename={basename}>
       <div className="min-h-screen flex flex-col justify-between bg-slate-50 text-slate-800 font-sans">
         <Navbar />
         <main className="flex-grow">

@@ -40,3 +40,30 @@ npm run lint
 - `src/pages/AdminDashboard.jsx`: dashboard con sugerencias del agente IA (Human-in-the-loop).
 - `src/data/mockData.js`: datos de ejemplo.
 - `src/services/api.js`: cliente REST (`VITE_API_URL`, por defecto `http://localhost:8000/api/v1`) con respuesta simulada si la API no responde.
+
+## Despliegue en GitHub Pages
+
+El proyecto se publica en <https://el-tiji.github.io/web-pope/>.
+
+1. En GitHub: **Settings → Pages → Build and deployment**
+   - **Source:** *Deploy from a branch*
+   - **Branch:** `gh-pages` / carpeta `/ (root)`
+   - Guardar.
+2. En local, publicar una nueva versión:
+
+```bash
+npm run deploy
+```
+
+Ese comando compila el proyecto (`npm run build`), genera `dist/404.html` para
+que funcionen las rutas internas (React Router) y sube `dist/` a la rama `gh-pages`.
+
+Notas:
+
+- `vite.config.js` usa `base: '/web-pope/'` en producción. Si el repositorio
+  cambia de nombre, actualiza ese valor.
+- `src/App.jsx` toma el `basename` del router desde `import.meta.env.BASE_URL`,
+  así que los enlaces funcionan tanto en local como en GitHub Pages.
+- Las funciones de login/registro usan datos simulados (`src/data/mockData.js`)
+  si no hay backend configurado; para conectar la API real define `VITE_API_URL`
+  al compilar, por ejemplo: `VITE_API_URL=https://mi-api.com/api/v1 npm run build`.
